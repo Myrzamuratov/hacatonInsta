@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Camera Interface</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/camera.css" />
+  </head>
+  <body>
+    <d  iv class="camera-interface">
+      <div class="camera_img"></div>
+      <div class="camera_footer">
+        <img class="selfie" src="../image/camera.png" alt="" />
+      </div>
+      <a href="../html/index.html" class="instagram-link" >Вернуться назад</a>
+    </div>
+
+    <!-- модалка -->
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <input
+          type="text"
+          placeholder="Введите ваше имя"
+          class="input-name-profile"
+        />
+        <input
+          type="text"
+          placeholder="Ваше фото профиля"
+          class="input-photo-profile"
+        />
+        <input
+          type="text"
+          placeholder="Фото которое хотите выложить"
+          class="input-photo-post"
+        />
+        <input
+          type="text"
+          placeholder="Описание под фото"
+          class="input-desc-post"
+        />
+        <button class="btn-add">Опубликовать</button>
+        <button class="btn-cancel">Отмена</button>
+      </div>
+    </div>
+
+    <!-- модалка -->
+    <script src="../js/camera.js"></script>
+  </body>
+</html>

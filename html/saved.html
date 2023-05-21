@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="./adaptive.styles/indexStyle.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- navbar start -->
+      <div class="navbar">
+        <div class="navbar_items">
+          <div class="navbar_items_logo">
+            <h1>INSTAGRAM Saves</h1>
+          </div>
+
+          <ul class="navbar_items_list">
+            <li>
+              <a href="../html/index.html"
+                ><img
+                  class="navbar_images"
+                  id="navbar_image1"
+                  src="../image/home (1).png"
+                  alt=""
+              /></a>
+              <h2 class="navbar_desc" id="navbar_desc1">Go to main</h2>
+            </li>
+            <li class="search-item">
+              <img
+                class="navbar_images"
+                id="navbar_image2"
+                src="../image/search (1).png"
+                alt=""
+              />
+              <input type="text" placeholder="search..." class="search-input" />
+              <h2 class="navbar_desc" id="navbar_desc2">
+                Search what you want
+              </h2>
+            </li>
+            <li>
+              <img
+                class="navbar_images"
+                id="add"
+                id="navbar_image3"
+                src="../image/add (1).png"
+                alt=""
+              />
+              <h2 class="navbar_desc" id="navbar_desc3">Add new post</h2>
+            </li>
+            <li>
+              <a href="../html/saved.html">
+                <img
+                  class="navbar_images"
+                  id="navbar_image4"
+                  src="../image/bookmark (1).png"
+                  alt=""
+                />
+              </a>
+              <h2 class="navbar_desc" id="navbar_desc4">Saved</h2>
+            </li>
+            <li>
+              <a href="../html/camera.html"
+                ><img
+                  class="navbar_images"
+                  id="navbar_image5"
+                  src="../image/camera.png"
+                  alt=""
+              /></a>
+              <h2 class="navbar_desc" id="navbar_desc5">Take a selfie</h2>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- navbar end -->
+      <!-- modal start -->
+      <!-- Модальный -->
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <input
+            type="text"
+            placeholder="Введите ваше имя"
+            class="input-name-profile"
+          />
+          <input
+            type="text"
+            placeholder="Ваше фото профиля"
+            class="input-photo-profile"
+          />
+          <input
+            type="text"
+            placeholder="Фото которое хотите выложить"
+            class="input-photo-post"
+          />
+          <input
+            type="text"
+            placeholder="Описание под фото"
+            class="input-desc-post"
+          />
+          <button class="btn-add">Опубликовать</button>
+          <button class="btn-cancel">Отмена</button>
+        </div>
+      </div>
+      <!-- modal end -->
+      <!-- list start -->
+      <div class="cards">
+        <div class="post-list"></div>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link prev" href="#">Previous</a>
+            </li>
+            <!-- <li class="page-item"><a class="page-link" href="#">1</a></li> -->
+            <div class="pagination-list d-flex"></div>
+            <li class="page-item">
+              <a class="page-link next" href="#">Next</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- list end -->
+    </div>
+    <script src="../js/saved.js"></script>
+  </body>
+</html>
