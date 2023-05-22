@@ -200,21 +200,44 @@ async function render() {
     let item = data[i];
     if (item.saved == "done") {
       postList.innerHTML += `<div class="card-list">
-    <div class="card">
-      <div class="card-content">
-        <div class="profile">
-          <img src="${item.profileI}" class="profile-photo" onerror="handleImageError()" alt="Profile Image" alt="Profile Photo">
-          <h3 class="${item.profileN}">${item.profileN}</h3>
-          <button onclick="savePost(${item.id})" class="btn-save-pub">Удалить из сохраненных</button>
-
+      <div class="card">
+        <div class="card-content">
+          <div class="profile">
+            <img src="${item.profileI}" class="profile-photo" onerror="handleImageError()" alt="Profile Image" alt="Profile Photo">
+            <h3 class="${item.profileN}">${item.profileN}</h3>
+            <button onclick="savePost(${item.id})" class="btn-save-pub">Сохранить</button>
+  
+          </div>
+          <p class="post-description">${item.descP}</p>
+          <img src="${item.photoP}" class="post-photo" alt="Post Photo">
+          <div class="card-buttons">
+          <button onclick="likeProduct(${item.id})" class="like">
+          <img class="button-images" src="../image/social-network.png" alt="">
+          <p>Нравится ${item.like}</p>
+        </button>
+        
+        <button onclick="disLikeProduct(${item.id})" class="disLike">
+          <img class="button-images" src="../image/hand.png" alt="">
+        </button>
+        
+        <button onclick="commentFunc(${item.id})" class="comment">
+          <img src="../image/comments.png" alt="">
+        </button>
+        
+        <button onclick="editProduct(${item.id}); openEditModal();" class="btnEdit">
+          <img class="button-images" src="../image/edit.png" alt="">
+        </button> 
+        
+        <button onclick="deleteProduct(${item.id})" class="btn-delete">
+          <img class="button-images" src="../image/trash.png" alt="">
+        </button>
+        
+          
+          
+          </div>
         </div>
-        <p class="post-description">${item.descP}</p>
-        <img src="${item.photoP}" class="post-photo" alt="Post Photo">
-        <button onclick="editProduct(${item.id})" data-bs-toggle="modal" data-bs-target="#editModal" class="btn-edit">edit</button>
-        <button onclick="deleteProduct(${item.id})" class="btn-delete">delete</button> 
       </div>
-    </div>
-  </div>`;
+    </div>`;
     }
   }
 
