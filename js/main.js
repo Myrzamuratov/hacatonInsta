@@ -479,12 +479,6 @@ async function commentFunc(id) {
     commBody.value = "";
     commName.value = "";
   });
-  commentList.innerHTML += `
-          <div id="comment-card">
-            <h2 id="comment-name">${comment.user}</h2>
-            <p id="comment-body">${comment.comment}</p>
-          </div>
-        `;
 }
 commentClose.addEventListener("click", () => {
   commentModal.style.display = "none";

@@ -82,6 +82,7 @@
       </div>
       <!-- navbar end -->
       <!-- modal start -->
+
       <!-- Модальный -->
       <div id="myModal" class="modal">
         <div class="modal-content">
@@ -127,7 +128,107 @@
         </nav>
       </div>
 
+      <!-- burger -->
+      <ul class="navbar-burger-list">
+        <p class="burger-close">X</p>
+        <p class="burger_menu">MENU</p>
+        <li>
+          <a href="../html/index.html"
+            ><img
+              class="burger-images"
+              id="navbar_image1"
+              src="../image/home (1).png"
+              alt=""
+          /></a>
+        </li>
+        <li class="search-item">
+          <img
+            class="burger-images"
+            id="navbar_image2"
+            src="../image/search (1).png"
+            alt=""
+          />
+          <input
+            type="text"
+            placeholder="search..."
+            class="search-input-burger"
+          />
+        </li>
+        <li>
+          <img
+            class="burger-images"
+            id="addburger"
+            id="navbar_image3"
+            src="../image/add (1).png"
+            alt=""
+          />
+        </li>
+        <li>
+          <a href="../html/saved.html"
+            ><img
+              class="burger-images"
+              id="navbar_image4"
+              src="../image/bookmark (1).png"
+              alt=""
+          /></a>
+        </li>
+        <li>
+          <a href="../html/camera.html"
+            ><img
+              class="burger-images"
+              id="navbar_image5"
+              src="../image/camera.png"
+              alt=""
+          /></a>
+        </li>
+      </ul>
       <!-- list end -->
+      <div id="editModal" class="modal">
+        <div class="modal-content">
+          <input
+            type="text"
+            placeholder="Введите ваше имя"
+            class="input-name-profile"
+            id="editNameProfile"
+          />
+          <input
+            type="text"
+            placeholder="Ваше фото профиля"
+            class="input-photo-profile"
+            id="editPhotoProfile"
+          />
+          <input
+            type="text"
+            placeholder="Фото которое хотите выложить"
+            class="input-photo-post"
+            id="editPhotoPost"
+          />
+          <input
+            type="text"
+            placeholder="Описание под фото"
+            class="input-desc-post"
+            id="editDescPost"
+          />
+          <button class="btn-add" id="editSave">Сохранить изменения</button>
+          <button class="btn-cancel" id="btn-cancel2">Отмена</button>
+        </div>
+      </div>
+      <!-- edit -->
+
+      <div class="modal-comments">
+        <div class="comment-field"></div>
+        <div class="modal-content-comments">
+          <input type="text" class="comment-input-name" placeholder="Имя" />
+          <input
+            type="text"
+            class="comment-input-body"
+            placeholder="Комментарии"
+          />
+          <button class="comment-btn-save">Сохранить</button>
+          <button class="comment-btn-close">Отмена</button>
+          <div class="comment-elem"></div>
+        </div>
+      </div>
     </div>
     <script src="../js/saved.js"></script>
   </body>

@@ -205,7 +205,7 @@ async function render() {
           <div class="profile">
             <img src="${item.profileI}" class="profile-photo" onerror="handleImageError()" alt="Profile Image" alt="Profile Photo">
             <h3 class="${item.profileN}">${item.profileN}</h3>
-            <button onclick="savePost(${item.id})" class="btn-save-pub">Сохранить</button>
+            <button onclick="savePost(${item.id})" class="btn-save-pub">Удалить из сохраненных</button>
   
           </div>
           <p class="post-description">${item.descP}</p>
@@ -289,6 +289,212 @@ async function savePost(id) {
   fetch(`${API}/${id}`, {
     method: "PUT",
     body: JSON.stringify(post),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Post updated successfully", data);
+    })
+    .catch((error) => {
+      console.error("Error updating post", error);
+    });
+
+  // Перерендерим страницу после сохранения
+  render();
+}
+const commentList = document.querySelector(".comment-elem");
+const commentModal = document.querySelector(".modal-comments");
+let commName = document.querySelector(".comment-input-name");
+let commBody = document.querySelector(".comment-input-body");
+let commentSave = document.querySelector(".comment-btn-save");
+let commentClose = document.querySelector(".comment-btn-close");
+
+async function commentFunc(id) {
+  commentModal.style.display = "block";
+
+  let comment = await fetch(`${API}/${id}`).then((res) => res.json());
+
+  commentSave.addEventListener("click", () => {
+    comment.user = commName.value;
+    comment.comment = commBody.value;
+    console.log(comment);
+    fetch(`${API}/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(comment),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Post updated successfully", data);
+        // Добавление карточки комментария в список комментариев
+        commentList.innerHTML += `
+          <div id="comment-card">
+            <h2 id="comment-name">${comment.user}</h2>
+            <p id="comment-body">${comment.comment}</p>
+          </div>
+        `;
+      })
+      .catch((error) => {
+        console.error("Error updating post", error);
+      });
+    commBody.value = "";
+    commName.value = "";
+  });
+  commentList.innerHTML += `
+          <div id="comment-card">
+            <h2 id="comment-name">${comment.user}</h2>
+            <p id="comment-body">${comment.comment}</p>
+          </div>
+        `;
+}
+commentClose.addEventListener("click", () => {
+  commentModal.style.display = "none";
+});
+
+let inpEdit1 = document.querySelector("#editNameProfile");
+let inpEdit2 = document.querySelector("#editPhotoProfile");
+let inpEdit3 = document.querySelector("#editPhotoPost");
+let inpEdit4 = document.querySelector("#editDescPost");
+let modale = document.querySelector("#editModal");
+let btnSave = document.querySelector("#editSave");
+let btnCan = document.querySelector("#btn-cancel2");
+async function editProduct(id) {
+  // Получаем данные выбранного поста для редактирования
+  let postToEdit = await fetch(`${API}/${id}`).then((res) => res.json());
+
+  // Заполняем инпуты в модальном окне для редактирования
+  inpEdit1.value = postToEdit.profileN;
+  inpEdit2.value = postToEdit.profileI;
+  inpEdit3.value = postToEdit.photoP;
+  inpEdit4.value = postToEdit.descP;
+
+  btnCan.addEventListener("click", () => {
+    modale.style.display = "none";
+    inpEdit1.value = "";
+    inpEdit2.value = "";
+    inpEdit3.value = "";
+    inpEdit4.value = "";
+  });
+
+  // Навешиваем id на кнопку сохранения изменений
+  btnSave.setAttribute("data-id", id);
+}
+
+// Слушатель событий на кнопку сохранения изменений
+btnSave.addEventListener("click", async (e) => {
+  // Получаем id, который был назначен выше
+  let id = e.target.getAttribute("data-id");
+
+  // Проверка на заполненность
+  if (
+    !inpEdit1.value.trim() ||
+    !inpEdit2.value.trim() ||
+    !inpEdit3.value.trim() ||
+    !inpEdit4.value.trim()
+  ) {
+    alert("Заполните все поля");
+    return;
+  }
+
+  // Собираем отредактированный пост
+  let editedPost = {
+    profileN: inpEdit1.value,
+    profileI: inpEdit2.value,
+    photoP: inpEdit3.value,
+    descP: inpEdit4.value,
+  };
+
+  // Отправляем PATCH запрос для сохранения изменений на сервере
+  await fetch(`${API}/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8",
+    },
+    body: JSON.stringify(editedPost),
+  });
+
+  modale.style.display = "none";
+
+  // Вызываем функцию render, чтобы увидеть отредактированный пост без перезагрузки страницы
+  render();
+});
+
+function openEditModal() {
+  let modale = document.querySelector("#editModal");
+  modale.style.display = "block";
+}
+
+let likeBtn = document.querySelector(".like");
+
+async function likeProduct(id) {
+  // Получаем объект из localStorage по ID
+  let like = await fetch(`${API}/${id}`).then((res) => res.json());
+
+  // Проверяем, существует ли объект и имеет ли свойство saved
+  if (!like || !like.saved) {
+    console.error(
+      `Unable to save post with ID ${id}. Post may not exist or missing 'saved' property.`
+    );
+    return;
+  }
+
+  // Вносим необходимые изменения в объект
+  like.like++;
+
+  // Обновляем объект в localStorage
+
+  localStorage.setItem(id, JSON.stringify(like));
+
+  // Отправляем запрос на сервер для обновления данных, если необходимо
+  fetch(`${API}/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(like),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Post updated successfully", data);
+    })
+    .catch((error) => {
+      console.error("Error updating post", error);
+    });
+
+  // Перерендерим страницу после сохранения
+  render();
+}
+
+// !Dislike
+let dislike = document.querySelector(".disLike");
+
+async function disLikeProduct(id) {
+  // Получаем объект из localStorage по ID
+  let like = await fetch(`${API}/${id}`).then((res) => res.json());
+
+  // Проверяем, существует ли объект и имеет ли свойство saved
+  if (!like || !like.saved) {
+    console.error(
+      `Unable to save post with ID ${id}. Post may not exist or missing 'saved' property.`
+    );
+    return;
+  }
+
+  // Вносим необходимые изменения в объект
+  like.like--;
+
+  // Обновляем объект в localStorage
+
+  localStorage.setItem(id, JSON.stringify(like));
+
+  // Отправляем запрос на сервер для обновления данных, если необходимо
+  fetch(`${API}/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(like),
     headers: {
       "Content-Type": "application/json",
     },
