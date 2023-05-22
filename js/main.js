@@ -61,8 +61,8 @@ btnAdd.addEventListener("click", () => {
     descP: inputDescPost.value,
     saved: "none",
     like: 0,
-    user: a,
-    comment: a,
+    user: "",
+    comment: "",
   };
 
   createProduct(newPost);
